@@ -1,0 +1,33 @@
+{
+  "name": "NHS Scotland A&E",
+  "dataColors": ["#005EB8", "#41B6E6", "#003087", "#768692", "#FFB81C", "#009639", "#DA291C", "#0072CE"],
+  "background": "#FFFFFF",
+  "foreground": "#212B32",
+  "tableAccent": "#005EB8",
+  "good": "#009639",
+  "neutral": "#FFB81C",
+  "bad": "#DA291C",
+  "maximum": "#005EB8",
+  "center": "#41B6E6",
+  "minimum": "#E8EDEE",
+  "textClasses": {
+    "title": { "fontFace": "Arial", "fontSize": 12, "color": "#212B32" },
+    "header": { "fontFace": "Arial", "fontSize": 12, "color": "#212B32" },
+    "label": { "fontFace": "Arial", "fontSize": 9, "color": "#4C6272" },
+    "callout": { "fontFace": "Arial", "fontSize": 28, "color": "#003087" }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [{ "show": false }],
+        "border": [{ "show": false }],
+        "dropShadow": [{ "show": false }]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [{ "color": { "solid": { "color": "#F0F4F5" } }, "transparency": 0 }]
+      }
+    }
+  }
+}
