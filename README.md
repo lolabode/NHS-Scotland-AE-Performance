@@ -1,5 +1,8 @@
 # A&E Performance in Scotland: Where and Why the 4-Hour Target Is Being Missed
 
+[![Open the live dashboard](https://img.shields.io/badge/Open%20the%20live%20dashboard-005EB8?style=for-the-badge&logoColor=white)](https://lolabode.github.io/nhs-ae-dashboard.html)
+[![Read the requirements](https://img.shields.io/badge/Read%20the%20requirements-003087?style=for-the-badge)](nhs_ae_requirements.pdf)
+
 **A business intelligence project on real NHS data, from requirements and a SQL Server data warehouse to an interactive dashboard and findings for decision-makers.**
 
 **Skills:** Requirements gathering · KPI definition · SQL Server (T-SQL) · Data modelling (star schema) · Data quality checks · Power BI (DAX) · Dashboard design · Data storytelling
@@ -12,9 +15,9 @@
 
 *Based on 39,905 monthly records from Public Health Scotland, July 2007 to July 2026.*
 
-[**Open the interactive dashboard**](https://lolabode.github.io/nhs-ae-dashboard.html)
+[![Executive summary: click to open the live dashboard](1_executive_summary.png)](https://lolabode.github.io/nhs-ae-dashboard.html)
 
-![Executive summary](1_executive_summary.png)
+*Click the image to open the live, interactive dashboard.*
 
 ---
 
