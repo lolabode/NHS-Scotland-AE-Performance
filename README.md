@@ -14,7 +14,7 @@
 
 [**Open the interactive dashboard**](https://lolabode.github.io/nhs-ae-dashboard.html)
 
-![Executive summary](screenshots/1_executive_summary.png)
+![Executive summary](1_executive_summary.png)
 
 ---
 
@@ -67,7 +67,7 @@ Three open datasets from Public Health Scotland, published under the UK Open Gov
 | **Missing names:** 15 sites, mostly closed minor injury units, aren't in the current hospitals list | Labelled clearly rather than dropped |
 | **Patient-level data isn't available everywhere:** 16 sites don't record 8 and 12-hour waits | Stored as empty, never as zero, so they don't distort the results |
 
-![Data quality page](screenshots/5_data_quality.png)
+![Data quality page](5_data_quality.png)
 
 ## 5. What the data shows
 
@@ -96,13 +96,19 @@ The biggest drop came between 2021 and 2022, and performance has stayed around 6
 
 ### Every health board is below target
 
-![Health boards page](screenshots/2_health_boards.png)
+![Health boards page](2_health_boards.png)
 
 In July 2026, **no health board met the 95% target** for its emergency departments. Forth Valley was furthest away at 46.7%, followed by Lanarkshire (54.0%) and Ayrshire and Arran (54.6%). Island boards performed best, led by Orkney at 91.8%.
 
+### Drilling down to individual hospitals
+
+![Hospital detail page](3_hospital_detail.png)
+
+Clicking any hospital opens its own page, comparing it with the Scotland average month by month and showing its long waits.
+
 ### Busier months perform worse, but demand isn't the whole story
 
-![Demand and seasonality page](screenshots/4_demand_and_seasonality.png)
+![Demand and seasonality page](4_demand_and_seasonality.png)
 
 Since 2021, months with more attendances have tended to perform worse (correlation of -0.48), but the link is moderate. Performance has stayed low even in quieter months, which suggests pressures beyond the number of patients arriving.
 
@@ -126,14 +132,28 @@ Since 2021, months with more attendances have tended to perform worse (correlati
 
 ## Files
 
+**Documents and dashboard**
+
 | File | What it is |
 |---|---|
 | [nhs_ae_requirements.pdf](nhs_ae_requirements.pdf) | Requirements: stakeholders, business questions, KPI definitions, acceptance criteria |
-| [sql/](sql/) | SQL Server scripts: database, staging, cleaning, star schema, quality checks and validation |
 | [NHS_AE_dashboard_wireframes.pptx](NHS_AE_dashboard_wireframes.pptx) | Wireframes and design system in the NHS colour palette |
 | [NHS_AE_theme.json](NHS_AE_theme.json) | Power BI theme file |
 | [nhs-ae-dashboard.html](nhs-ae-dashboard.html) | Interactive dashboard (download and open in a browser) |
-| [screenshots/](screenshots/) | Images of each dashboard page |
+
+**SQL Server scripts** (run in order; see [README_run_order.md](README_run_order.md))
+
+| File | What it does |
+|---|---|
+| [00_create_database.sql](00_create_database.sql) | Creates the database and its staging, clean and warehouse schemas |
+| [01_load_staging.sql](01_load_staging.sql) | Loads the raw CSV files |
+| [01b_load_hospital_locations_optional.sql](01b_load_hospital_locations_optional.sql) | Optional: adds names for closed sites |
+| [02_clean.sql](02_clean.sql) | Cleans and types the data, and combines the duplicate |
+| [03_star_schema.sql](03_star_schema.sql) | Builds the fact and dimension tables |
+| [04_data_quality_checks.sql](04_data_quality_checks.sql) | Runs the 11 data quality checks |
+| [05_validate_against_published.sql](05_validate_against_published.sql) | Checks the results against the source figures |
+
+**Screenshots:** [Executive summary](1_executive_summary.png) · [Health boards](2_health_boards.png) · [Hospital detail](3_hospital_detail.png) · [Demand and seasonality](4_demand_and_seasonality.png) · [Data quality](5_data_quality.png)
 
 Data source: Public Health Scotland, Monthly A&E Activity and Waiting Times. Contains public sector information licensed under the Open Government Licence v3.0.
 
