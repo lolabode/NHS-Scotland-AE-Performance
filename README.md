@@ -15,7 +15,7 @@
 
 *Based on 39,905 monthly records from Public Health Scotland, July 2007 to July 2026.*
 
-[![Executive summary: click to open the live dashboard](1_executive_summary.png)](https://lolabode.github.io/nhs-ae-dashboard.html)
+[![Overview page: click to open the live dashboard](1_overview.jpg)](https://lolabode.github.io/nhs-ae-dashboard.html)
 
 *Click the image to open the live, interactive dashboard.*
 
@@ -55,7 +55,7 @@ Three open datasets from Public Health Scotland, published under the UK Open Gov
 | Validation | Checked the results against the source data (July 2026: 65.0% for emergency departments, 92.7% for minor injury units, 69.1% overall) |
 | Power BI model | Connected Power BI to SQL Server, set up the relationships and wrote DAX measures matching the KPI definitions |
 | Design | Designed five pages as wireframes in the NHS colour palette before building |
-| Dashboard | Built an interactive web dashboard with five pages, filters and drill-down from health board to hospital |
+| Dashboard | Built an interactive five-page dashboard in a Power BI-style layout, with slicers, page tabs, drill-down from health board to hospital, and a data-driven headline on every filter |
 
 **Two rules that keep the numbers right:**
 - **Percentages are always calculated from totals, never averaged,** so a small minor injury unit doesn't count as much as a large emergency department.
@@ -70,7 +70,7 @@ Three open datasets from Public Health Scotland, published under the UK Open Gov
 | **Missing names:** 15 sites, mostly closed minor injury units, aren't in the current hospitals list | Labelled clearly rather than dropped |
 | **Patient-level data isn't available everywhere:** 16 sites don't record 8 and 12-hour waits | Stored as empty, never as zero, so they don't distort the results |
 
-![Data quality page](5_data_quality.png)
+![Data quality page](5_data_quality.jpg)
 
 ## 5. What the data shows
 
@@ -99,25 +99,44 @@ The biggest drop came between 2021 and 2022, and performance has stayed around 6
 
 ### Every health board is below target
 
-![Health boards page](2_health_boards.png)
+![Health boards page](2_health_boards.jpg)
 
 In July 2026, **no health board met the 95% target** for its emergency departments. Forth Valley was furthest away at 46.7%, followed by Lanarkshire (54.0%) and Ayrshire and Arran (54.6%). Island boards performed best, led by Orkney at 91.8%.
 
 ### Drilling down to individual hospitals
 
-![Hospital detail page](3_hospital_detail.png)
+![Hospital detail page](3_hospital_detail.jpg)
 
-Clicking any hospital opens its own page, comparing it with the Scotland average month by month and showing its long waits.
+The Hospital detail page compares any hospital with the Scotland average for the same type of department, month by month, and shows the share of its patients waiting more than 12 hours.
 
 ### Busier months perform worse, but demand isn't the whole story
 
-![Demand and seasonality page](4_demand_and_seasonality.png)
+![Why it is happening page](4_why_it_is_happening.jpg)
 
 Since 2021, months with more attendances have tended to perform worse (correlation of -0.48), but the link is moderate. Performance has stayed low even in quieter months, which suggests pressures beyond the number of patients arriving.
 
 **December is consistently the hardest month.** Since 2022, an average of 61.1% of patients were seen within 4 hours in December, against 67.4% in May.
 
-## 6. Recommendations
+## 6. Dashboard design
+
+The dashboard is built to tell one story: performance fell sharply in 2021 and 2022, has not recovered, and demand alone does not explain why.
+
+| Page | What it answers |
+|---|---|
+| Overview | A headline written from the data, four KPI cards with 24-month sparklines, an annotated trend since 2015, a health board ranking and recommendations |
+| Health boards | How every board compares, with change since last year, the 2019 figure, the 12-hour rate and months the target was met |
+| Hospital detail | How any hospital compares with the Scotland average, including the share waiting over 12 hours |
+| Why it is happening | Whether busier months perform worse, and every month since 2015 in a heatmap |
+| Data quality | Every check run on the data and how each issue was handled |
+
+**Design choices:**
+- **Colour has one meaning throughout:** NHS blue for data, grey for context, dark blue to highlight one thing per chart, and red only for the 95% target.
+- **Annotations tell the story on the chart itself,** such as the last month the target was met (June 2020) and the lowest point since 2022.
+- **12-hour waits are shown as a rate,** the share of patients, so busier and quieter months compare fairly.
+- **The heatmap uses a single-colour scale,** so it can be read by people with colour vision deficiency.
+- **How-to-read notes sit behind info icons,** keeping the charts uncluttered.
+
+## 7. Recommendations
 
 1. **Focus support on the boards furthest from target.** Forth Valley, Lanarkshire and Ayrshire and Arran are 40 or more points short. Learning from the best-performing mainland boards, such as Tayside, is a natural starting point.
 2. **Track 12-hour waits as closely as the 4-hour target.** They have grown almost fifteen-fold since 2019 and carry the greatest risk to patients.
@@ -125,7 +144,7 @@ Since 2021, months with more attendances have tended to perform worse (correlati
 4. **Look beyond A&E for the causes.** Since performance stays low even in quieter months, the next step is to bring in data on hospital bed occupancy and delayed discharges, which affect how quickly A&E patients can be admitted.
 5. **Improve data completeness.** 16 sites don't record detailed waiting times, so their long waits are unknown.
 
-## 7. Limitations and next steps
+## 8. Limitations and next steps
 
 - **The data is monthly and site-level,** so it shows *where* and *when* waits are long, but not *why*. Explaining the causes needs further data, such as bed occupancy.
 - **The Power BI version is in progress.** The SQL database, data model and DAX measures are complete; the published interactive version is a web dashboard built with AI assistance, which mirrors the Power BI design so anyone can view it without a Power BI licence.
@@ -156,7 +175,7 @@ Since 2021, months with more attendances have tended to perform worse (correlati
 | [04_data_quality_checks.sql](04_data_quality_checks.sql) | Runs the 11 data quality checks |
 | [05_validate_against_published.sql](05_validate_against_published.sql) | Checks the results against the source figures |
 
-**Screenshots:** [Executive summary](1_executive_summary.png) · [Health boards](2_health_boards.png) · [Hospital detail](3_hospital_detail.png) · [Demand and seasonality](4_demand_and_seasonality.png) · [Data quality](5_data_quality.png)
+**Screenshots:** [Overview](1_overview.jpg) · [Health boards](2_health_boards.jpg) · [Hospital detail](3_hospital_detail.jpg) · [Why it is happening](4_why_it_is_happening.jpg) · [Data quality](5_data_quality.jpg)
 
 Data source: Public Health Scotland, Monthly A&E Activity and Waiting Times. Contains public sector information licensed under the Open Government Licence v3.0.
 
